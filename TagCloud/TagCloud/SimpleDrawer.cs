@@ -14,16 +14,13 @@ namespace TagCloud
 			using (var graphics = Graphics.FromImage(bitmap))
 			{
 				float height = 0;
-				float width = 0;
-				var index = 0;
-				var sizes = new[] {5, 4, 4, 4, 4, 3, 3, 3, 2, 2, 1};
-				graphics.Clear(Color.White);
-				foreach (var word in words.Take(11))
+				graphics.Clear(Color.Yellow);
+				var sum = words.Take(config.Count).Sum(x => x.Value);
+				foreach (var word in words.Take(config.Count))
 				{
-					var font = new Font(FontFamily.GenericSansSerif, (bitmap.Height / 35) * sizes[index++], GraphicsUnit.Pixel);
-					SizeF textSize = graphics.MeasureString(word.Key, font);
-					graphics.DrawString(word.Key, font, new SolidBrush(Color.Red), new PointF(width, height));
-					height += (bitmap.Height / 35) * sizes[index - 1];
+					var font = new Font(FontFamily.GenericSansSerif, (bitmap.Height / sum) * word.Value, GraphicsUnit.Pixel);
+					graphics.DrawString(word.Key, font, new SolidBrush(Color.Red), new PointF(0, height));
+					height += (bitmap.Height / sum) * word.Value;
 				}
 			}
 			return bitmap;

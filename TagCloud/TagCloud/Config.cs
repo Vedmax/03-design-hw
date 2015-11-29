@@ -13,8 +13,10 @@ namespace TagCloud
 	{
 		public int Width;
 		public int Height;
+		public int Count;
 		public string ImageFormat;
 		public string Algorithm;
+
 
 		public Config(string fileName)
 		{
@@ -22,6 +24,7 @@ namespace TagCloud
 			GetSizes(config);
 			ImageFormat = config[2];
 			Algorithm = config[3];
+			Count = int.Parse(config[4]);
 		}
 
 		private void GetSizes(IReadOnlyList<string> config)
