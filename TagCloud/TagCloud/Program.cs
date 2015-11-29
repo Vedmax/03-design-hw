@@ -15,7 +15,7 @@ namespace TagCloud
 			var kernel = new Ninject.StandardKernel();
 			kernel.Bind<CommandLineArgs>().ToConstant(new CommandLineArgs(args));
 			kernel.Bind<Config>().ToConstant(new Config(kernel.Get<CommandLineArgs>().ConfigFile));
-			kernel.Bind<IFileParser>().To<SimpleFileParser>();
+			kernel.Bind<IFileParser>().To<TextFileParser>();
 			kernel.Bind<IApplication>().To<ConsoleApp>();
 			kernel.Get<IApplication>().Start();
 		}
