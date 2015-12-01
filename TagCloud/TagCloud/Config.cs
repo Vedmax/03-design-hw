@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -16,6 +17,9 @@ namespace TagCloud
 		public int Count;
 		public string ImageFormat;
 		public string Algorithm;
+		public string Font;
+		public string Color;
+		public string Background;
 
 
 		public Config(string fileName)
@@ -25,7 +29,11 @@ namespace TagCloud
 			ImageFormat = config[2];
 			Algorithm = config[3];
 			Count = int.Parse(config[4]);
+			Font = config[5];
+			Color = config[6];
+			Background = config[7];
 		}
+
 
 		private void GetSizes(IReadOnlyList<string> config)
 		{

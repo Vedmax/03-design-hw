@@ -1,54 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using CommandLine;
+using Ninject.Syntax;
 
 namespace TagCloud
 {
 	public class CommandLineArgs
 	{
-		private readonly string[] args;
-
-		public CommandLineArgs(params string[] args)
-		{
-			this.args = args;
-		}
-
+		[Option('t', "TextFile", DefaultValue = @"../../Default/text.txt",
+			HelpText = "Text File")]
 		public string TextFile
 		{
-			get
-			{
-				if (args.Length == 0) return @"../../Default/text.txt";
-				return args[0];
-			}
+			get; set;
 		}
 
+		[Option('b', "banned", DefaultValue = @"../../Default/blacklist.txt",
+			HelpText = "Banned Words File")]
 		public string BannedWordsFile
 		{
-			get
-			{
-				if (args.Length < 2) return @"../../Default/blacklist.txt";
-				return args[1];
-			}
+			get; set;
 		}
 
+
+		[Option('c', "config", DefaultValue = @"../../Default/config.txt",
+			HelpText = "Config File")]
 		public string ConfigFile
 		{
-			get
-			{
-				if (args.Length < 3) return @"../../Default/config.txt";
-				return args[2];
-			}
+			get; set;
 		}
 
+		[Option('r', "result", DefaultValue = "image", HelpText = "Result file with image")]
 		public string ResultFile
 		{
-			get
-			{
-				if (args.Length < 4) return "image";
-				return args[3];
-			}
+			get; set;
 		}
 	}
 }

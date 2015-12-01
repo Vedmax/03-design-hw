@@ -3,3 +3,6 @@
 jpeg
 simple
 11
+Arial
+Black
+Green

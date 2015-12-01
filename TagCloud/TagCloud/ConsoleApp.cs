@@ -13,6 +13,7 @@ namespace TagCloud
 		private readonly CommandLineArgs _args;
 		private readonly Config _config;
 		private readonly IFileParser _parser;
+		private readonly IDrawer _drawer;
 
 		public Dictionary<string, ImageFormat> Formats = new Dictionary<string, ImageFormat>
 		{
@@ -22,16 +23,13 @@ namespace TagCloud
 			{"bmp", ImageFormat.Bmp}
 		};
 
-		public Dictionary<string, IDrawer> Drawers = new Dictionary<string, IDrawer>
-		{
-			{"simple", new SimpleDrawer()}
-		};
 
-		public ConsoleApp(CommandLineArgs arguments, Config configuration, IFileParser fileParser)
+		public ConsoleApp(CommandLineArgs arguments, Config configuration, IFileParser fileParser, IDrawer drawer)
 		{
 			_args = arguments;
 			_config = configuration;
 			_parser = fileParser;
+			_drawer = drawer;
 		}
 
 		public void Start()
@@ -55,8 +53,7 @@ namespace TagCloud
 		{
 			using (var bitmap = new Bitmap(_config.Width, _config.Height))
 			{
-				var drawer = Drawers[_config.Algorithm];
-				var image = drawer.CreateCloud(bitmap, _config, words);
+				var image = _drawer.CreateCloud(bitmap, _config, words);
 				image.Save(_args.ResultFile + '.' + _config.ImageFormat, Formats[_config.ImageFormat]);
 			}
 		}
