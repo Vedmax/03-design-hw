@@ -19,7 +19,6 @@ namespace TagCloud
 				foreach (var word in words.Take(config.Count))
 				{
 					var wordHeight = (bitmap.Height/sum)*word.Value;
-                    // DONE попробуй порефакторить, например вот эти 3 строчки можно выделить в функцию DrawWord и сразу станет понятнее что происходит 
 					DrawWord(word, graphics, wordHeight, height, config);
 					height += wordHeight;
 				}
