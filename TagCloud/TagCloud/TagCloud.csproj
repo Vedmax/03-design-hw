@@ -55,7 +55,6 @@
   <ItemGroup>
     <Compile Include="CloudGeneratorShould.cs" />
     <Compile Include="CommandLineArgs.cs" />
-    <Compile Include="CommandLineParser.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="ConsoleApp.cs" />
     <Compile Include="IApplication.cs" />
