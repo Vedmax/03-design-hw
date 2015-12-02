@@ -14,6 +14,7 @@ namespace TagCloud
 		private readonly Config _config;
 		private readonly IFileParser _parser;
 		private readonly IDrawer _drawer;
+		private readonly IWordPreparer _wordPreparer;
 
 		public Dictionary<string, ImageFormat> Formats = new Dictionary<string, ImageFormat>
 		{
@@ -24,30 +25,21 @@ namespace TagCloud
 		};
 
 
-		public ConsoleApp(CommandLineArgs arguments, Config configuration, IFileParser fileParser, IDrawer drawer)
+		public ConsoleApp(CommandLineArgs arguments, Config configuration, IFileParser fileParser, IDrawer drawer, IWordPreparer wordPreparer)
 		{
 			_args = arguments;
 			_config = configuration;
 			_parser = fileParser;
 			_drawer = drawer;
+			_wordPreparer = wordPreparer;
 		}
 
 		public void Start()
 		{
-			var wordsDictionary = _parser.CreateDictionaryFromFile(_args.TextFile);
-			var bannedWordsDictionary = _parser.CreateDictionaryFromFile(_args.BannedWordsFile);
-			var topWords = GetSortedWords(wordsDictionary, bannedWordsDictionary);
-
+			var topWords = _wordPreparer.GetTopWords(_args, _parser);
 			CreateImage(_args.ResultFile, topWords);
 		}
-
-		private static Dictionary<string, int> GetSortedWords(Dictionary<string, int> words, Dictionary<string, int> bannedWords)
-		{
-			return words
-				.Where(x => !bannedWords.ContainsKey(x.Key))
-				.OrderByDescending(x => x.Value)
-				.ToDictionary(pair => pair.Key, pair => pair.Value);
-		}
+		
 
 		public void CreateImage(string fileName, Dictionary<string, int> words)
 		{
