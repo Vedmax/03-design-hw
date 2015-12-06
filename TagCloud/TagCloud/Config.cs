@@ -30,7 +30,14 @@ namespace TagCloud
 
 		public Config(string fileName)
 		{
-			ConfigModel = JsonConvert.DeserializeObject<ConfigModel>(File.ReadAllText(fileName));
+			var stream = File.Open(fileName, FileMode.Open);
+			ConfigModel = new Config(stream).ConfigModel;
+		}
+
+		public Config(Stream stream)
+		{
+			var reader = new StreamReader(stream, Encoding.UTF8);
+			ConfigModel = JsonConvert.DeserializeObject<ConfigModel>(reader.ReadToEnd());
 		}
 	}
 }

@@ -8,7 +8,7 @@ namespace TagCloud
 {
 	public class SimplePreparer : IWordPreparer
 	{
-		private static Dictionary<string, int> GetSortedWords(Dictionary<string, int> words, Dictionary<string, int> bannedWords)
+		public Dictionary<string, int> GetSortedWords(Dictionary<string, int> words, Dictionary<string, int> bannedWords)
 		{
 			return words
 				.Where(x => !bannedWords.ContainsKey(x.Key))

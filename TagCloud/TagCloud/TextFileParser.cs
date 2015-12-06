@@ -21,7 +21,7 @@ namespace TagCloud
 			var reader = new StreamReader(stream, Encoding.UTF8);
 			var dictionary = new Dictionary<string, int>();
 			var words = reader.ReadToEnd()
-				.Split('.', ' ', ':', '!', '?', '\r', '\n')
+				.Split('.', ' ', ':', '!', '?', '\r', '\n', ',')
 				.Where(x => !string.IsNullOrEmpty(x))
 				.Select(x => x.ToLower());
 			foreach (var word in words)
