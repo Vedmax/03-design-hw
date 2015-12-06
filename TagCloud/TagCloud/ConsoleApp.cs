@@ -15,39 +15,25 @@ namespace TagCloud
 		private readonly IFileParser _parser;
 		private readonly IDrawer _drawer;
 		private readonly IWordPreparer _wordPreparer;
-
-		public Dictionary<string, ImageFormat> Formats = new Dictionary<string, ImageFormat>
-		{
-			{"png", ImageFormat.Png},
-			{"jpeg", ImageFormat.Jpeg},
-			{"gif", ImageFormat.Gif},
-			{"bmp", ImageFormat.Bmp}
-		};
+		private readonly ISaver _imageSaver;
 
 
-		public ConsoleApp(CommandLineArgs arguments, Config configuration, IFileParser fileParser, IDrawer drawer, IWordPreparer wordPreparer)
+		public ConsoleApp(CommandLineArgs arguments, Config configuration, IFileParser fileParser, IDrawer drawer, 
+			IWordPreparer wordPreparer, ISaver imageSaver)
 		{
 			_args = arguments;
 			_config = configuration;
 			_parser = fileParser;
 			_drawer = drawer;
 			_wordPreparer = wordPreparer;
+			_imageSaver = imageSaver;
 		}
 
 		public void Start()
 		{
 			var topWords = _wordPreparer.GetTopWords(_args, _parser);
-			CreateImage(_args.ResultFile, topWords);
-		}
-		
-
-		public void CreateImage(string fileName, Dictionary<string, int> words)
-		{
-			using (var bitmap = new Bitmap(_config.Width, _config.Height))
-			{
-				var image = _drawer.CreateCloud(bitmap, _config, words);
-				image.Save(_args.ResultFile + '.' + _config.ImageFormat, Formats[_config.ImageFormat]);
-			}
+			var image = _drawer.CreateCloud(_config, topWords);
+			_imageSaver.SaveImage(image, _args.ResultFile, _config);
 		}
 	}
 }

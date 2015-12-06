@@ -1,8 +1,10 @@
-600
-600
-jpeg
-simple
-11
-Arial
-Black
-Green
+{
+Width: 600,
+Height: 600,
+Count: 11,
+ImageFormat: 'jpeg',
+Algorithm: 'simple',
+Font: 'Arial',
+Color: 'Black',
+Background: 'Green'
+}

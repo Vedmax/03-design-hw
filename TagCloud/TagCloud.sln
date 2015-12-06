@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagCloud", "TagCloud\TagCloud.csproj", "{08B4E00C-97CF-4F46-9234-9CA07E723A61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagCloudShould", "TagCloudShould\TagCloudShould.csproj", "{F282E515-7BE8-432D-980C-8D67EB891E92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{08B4E00C-97CF-4F46-9234-9CA07E723A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08B4E00C-97CF-4F46-9234-9CA07E723A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08B4E00C-97CF-4F46-9234-9CA07E723A61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F282E515-7BE8-432D-980C-8D67EB891E92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F282E515-7BE8-432D-980C-8D67EB891E92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F282E515-7BE8-432D-980C-8D67EB891E92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F282E515-7BE8-432D-980C-8D67EB891E92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

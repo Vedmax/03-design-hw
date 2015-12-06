@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using NuGet;
 
 namespace TagCloud
 {
@@ -11,8 +12,15 @@ namespace TagCloud
 	{
 		public Dictionary<string, int> CreateDictionaryFromFile(string fileName)
 		{
+			var stream = File.Open(fileName, FileMode.Open);
+			return CreateDictionaryFromStream(stream);
+		}
+
+		public Dictionary<string, int> CreateDictionaryFromStream(Stream stream)
+		{
+			var reader = new StreamReader(stream, Encoding.UTF8);
 			var dictionary = new Dictionary<string, int>();
-			var words = File.ReadAllText(fileName)
+			var words = reader.ReadToEnd()
 				.Split('.', ' ', ':', '!', '?', '\r', '\n')
 				.Where(x => !string.IsNullOrEmpty(x))
 				.Select(x => x.ToLower());
